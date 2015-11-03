@@ -4,15 +4,22 @@ using System.Collections;
 public class CharacterControl : MonoBehaviour {
 
 	public float moveSpeed = 10f;
-	public GameObject bulletObject;
+	public GameObject leftJaring;
+    public GameObject rightJaring;
+    public GameObject topJaring;
+    public GameObject bottomJaring;
 	public float bulletDuration = 2f;
 	public float bulletSpeed = 10f;
 	public float freezeTime = 2f;
+    public float cooldownTime = 2f;
 	public VirtualDirectionalControl dirControl;
 	public VirtualButton actionButton;
 
 	private float savedFreezeTime;
 	private bool isFiring;
+
+    private float savedCooldownTime;
+    private bool canCast;
 
 	private Rigidbody2D mainRigid;
 	private Vector2 moveDir;
@@ -25,12 +32,19 @@ public class CharacterControl : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		mainRigid = gameObject.GetComponent<Rigidbody2D>();
-		SpriteRenderer bulletSprite = bulletObject.GetComponent<SpriteRenderer>();
-
-		moveDir = new Vector2 ();
-		bulletSprite.enabled = false;
+        SpriteRenderer lRender = leftJaring.GetComponent<SpriteRenderer>();
+        SpriteRenderer rRender = rightJaring.GetComponent<SpriteRenderer>();
+        SpriteRenderer tRender = topJaring.GetComponent<SpriteRenderer>();
+        SpriteRenderer bRender = bottomJaring.GetComponent<SpriteRenderer>();
+        lRender.enabled = false;
+        rRender.enabled = false;
+        tRender.enabled = false;
+        bRender.enabled = false;
+        moveDir = new Vector2 ();
 		isFiring = false;
+        canCast = true;
 		savedFreezeTime = freezeTime;
+        savedCooldownTime = cooldownTime;
 
         direction = 2;
         isWalking = false;
@@ -46,6 +60,15 @@ public class CharacterControl : MonoBehaviour {
 				freezeTime = savedFreezeTime;
 			}
 		}
+        if (!canCast)
+        {
+            cooldownTime -= Time.deltaTime;
+            if (cooldownTime <= 0.0f)
+            {
+                canCast = true;
+                cooldownTime = savedCooldownTime;
+            }
+        }
 	}
 
 	void FixedUpdate() {
@@ -89,7 +112,7 @@ public class CharacterControl : MonoBehaviour {
 		}
 		Move (moveDir);
 
-		if(actionButton.GetPressedDown()) {
+		if(actionButton.GetPressedDown() && canCast) {
 			FireBullet();
 		}
 
@@ -115,20 +138,54 @@ public class CharacterControl : MonoBehaviour {
 	// change bullet duration if you want longer duration of the bullet
 	void FireBullet() {
 		isFiring = true;
-		GameObject bObject = Instantiate(bulletObject, new Vector3(gameObject.transform.position.x, 
-		                                                           gameObject.transform.position.y, 
-		                                                           gameObject.transform.position.z),
-		                                 Quaternion.identity) as GameObject;
-		Rigidbody2D bRigid = bObject.GetComponent<Rigidbody2D>();
-		Physics2D.IgnoreCollision (gameObject.GetComponent<Collider2D> (), bObject.GetComponent<Collider2D> ());
-		SpriteRenderer bRender = bObject.GetComponent<SpriteRenderer>();
-		float rotation = gameObject.transform.rotation.eulerAngles.z;
-		float x = Mathf.Cos(rotation * Mathf.Deg2Rad);
-		float y = Mathf.Sin(rotation * Mathf.Deg2Rad);
-		bObject.transform.rotation = Quaternion.AngleAxis (rotation, new Vector3 (0, 0, 1));
-		bRigid.velocity = new Vector2 (x * bulletSpeed, y * bulletSpeed);
-		bRender.enabled = true;
-		Destroy(bObject, bulletDuration);
-
+        canCast = false;
+        GameObject projObject;
+        SpriteRenderer projRender;
+        if (direction == 2)
+        {
+            projObject = Instantiate(topJaring, new Vector3(gameObject.transform.position.x,
+                                                            gameObject.transform.position.y,
+                                                            gameObject.transform.position.z),
+                                     Quaternion.identity) as GameObject;
+            projRender = projObject.GetComponent<SpriteRenderer>();
+            projObject.transform.position = projObject.transform.position + new Vector3(0f, projRender.bounds.extents.y / 2f, 0f);
+            Rigidbody2D bRigid = projObject.GetComponent<Rigidbody2D>();
+            bRigid.velocity = new Vector2(0 * bulletSpeed, 1 * bulletSpeed);
+        }
+        else if (direction == 4)
+        {
+            projObject = Instantiate(leftJaring, new Vector3(gameObject.transform.position.x,
+                                                             gameObject.transform.position.y,
+                                                             gameObject.transform.position.z),
+                                     Quaternion.identity) as GameObject;
+            projRender = projObject.GetComponent<SpriteRenderer>();
+            projObject.transform.position = projObject.transform.position - new Vector3(projRender.bounds.extents.x / 2f, 0f, 0f);
+            Rigidbody2D bRigid = projObject.GetComponent<Rigidbody2D>();
+            bRigid.velocity = new Vector2(-1 * bulletSpeed, 0 * bulletSpeed);
+        }
+        else if (direction == 6)
+        {
+            projObject = Instantiate(rightJaring, new Vector3(gameObject.transform.position.x,
+                                                              gameObject.transform.position.y,
+                                                              gameObject.transform.position.z),
+                                     Quaternion.identity) as GameObject;
+            projRender = projObject.GetComponent<SpriteRenderer>();
+            projObject.transform.position = projObject.transform.position + new Vector3(projRender.bounds.extents.x / 2f, 0f, 0f);
+            Rigidbody2D bRigid = projObject.GetComponent<Rigidbody2D>();
+            bRigid.velocity = new Vector2(1 * bulletSpeed, 0 * bulletSpeed);
+        }
+        else
+        {
+            projObject = Instantiate(bottomJaring, new Vector3(gameObject.transform.position.x,
+                                                               gameObject.transform.position.y,
+                                                               gameObject.transform.position.z),
+                                     Quaternion.identity) as GameObject;
+            projRender = projObject.GetComponent<SpriteRenderer>();
+            projObject.transform.position = projObject.transform.position - new Vector3(0f, projRender.bounds.extents.y / 2f, 0f);
+            Rigidbody2D bRigid = projObject.GetComponent<Rigidbody2D>();
+            bRigid.velocity = new Vector2(0 * bulletSpeed, -1 * bulletSpeed);
+        }
+        projRender.enabled = true;
+        Destroy(projObject, bulletDuration);
 	}
 }
