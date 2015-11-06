@@ -28,7 +28,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187316}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 5.19999981, y: -2.29999995, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -106,14 +106,14 @@ MonoBehaviour:
   target: {fileID: 0}
   stage: {fileID: 0}
   aspectRatio: 1.77999997
-  smoothTime: .5
-  verticalMaxEnabled: 0
+  smoothTime: 0
+  verticalMaxEnabled: 1
   verticalMax: 0
-  verticalMinEnabled: 0
+  verticalMinEnabled: 1
   verticalMin: 0
-  horizontalMaxEnabled: 0
+  horizontalMaxEnabled: 1
   horizontalMax: 0
-  horizontalMinEnabled: 0
+  horizontalMinEnabled: 1
   horizontalMin: 0
 --- !u!124 &12422364
 Behaviour:
