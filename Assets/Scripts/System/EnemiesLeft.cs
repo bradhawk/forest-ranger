@@ -4,14 +4,14 @@ using UnityEngine.UI;
 
 public class EnemiesLeft : MonoBehaviour {
 
-    public int maxEnemies;
     public Text textField;
     private int enemiesLeft;
-
+    private int maxEnemies;
+    
 	// Use this for initialization
 	void Start ()
     {
-        enemiesLeft = maxEnemies;
+
 	}
 	
 	// Update is called once per frame
@@ -22,6 +22,12 @@ public class EnemiesLeft : MonoBehaviour {
             textField.text = enemiesLeft + "/" + maxEnemies;
         }	
 	}
+
+    public void instantiateEnemy()
+    {
+        maxEnemies++;
+        enemiesLeft = maxEnemies;
+    }
 
     public void decreaseEnemy()
     {

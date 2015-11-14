@@ -7,6 +7,7 @@ public class VirtualButton : MonoBehaviour {
 	public float relativeSize = 6f;
 	public float relativeRight = 20f;
 	public float relativeBottom = 20f;
+    public bool isEnabled = true;
 
 	private float size;
 	private float topPos;
@@ -35,22 +36,28 @@ public class VirtualButton : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (lastScreenHeight != Screen.height || lastScreenWidth != Screen.width) {
-			lastScreenHeight = Screen.height;
-			lastScreenWidth = Screen.width;
-			//TODO: updated when screen size changed
-			size = Screen.height / relativeSize;
-			topPos = (Screen.height - size) - (Screen.width / relativeBottom);
-			leftPos = (Screen.width - size) - (Screen.width / relativeRight);
-			buttonRect.Set (leftPos, topPos, size, size);
-		}
-		if (isPressed && !GetPressed ()) {
-			isPressed = false;
-		}
+        if (isEnabled)
+        {
+            if (lastScreenHeight != Screen.height || lastScreenWidth != Screen.width)
+            {
+                lastScreenHeight = Screen.height;
+                lastScreenWidth = Screen.width;
+                //TODO: updated when screen size changed
+                size = Screen.height / relativeSize;
+                topPos = (Screen.height - size) - (Screen.width / relativeBottom);
+                leftPos = (Screen.width - size) - (Screen.width / relativeRight);
+                buttonRect.Set(leftPos, topPos, size, size);
+            }
+            if (isPressed && !GetPressed())
+            {
+                isPressed = false;
+            }
+        }
 	}
 
 	void OnGUI() {
-		if (!buttonGraphics) {
+        if (!buttonGraphics || !isEnabled)
+        {
 			return;
 		}
 		GUI.DrawTexture (buttonRect, buttonGraphics, ScaleMode.StretchToFill, true);

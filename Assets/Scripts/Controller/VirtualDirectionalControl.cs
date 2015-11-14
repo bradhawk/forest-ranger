@@ -7,6 +7,7 @@ public class VirtualDirectionalControl : MonoBehaviour {
 	public float relativeSize = 3f;
 	public float relativeLeft = 20f;
 	public float relativeBottom = 20f;
+    public bool isEnabled = true;
 
 	private float size;
 	private float topPos;
@@ -58,31 +59,37 @@ public class VirtualDirectionalControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (lastScreenHeight != Screen.height || lastScreenWidth != Screen.width) {
-			lastScreenHeight = Screen.height;
-			lastScreenWidth = Screen.width;
-			// TODO: call when size changed
-			size = Screen.height / relativeSize;
-			topPos = (Screen.height - size) - (Screen.width / relativeBottom);
-			leftPos = Screen.width / relativeLeft;
-			boxSize = size / 3f;
-			int index = 0;
-			for(int i = 0; i < 3; i++) {
-				for(int j = 0; j < 3; j++) {
-					float boxLeftPos = leftPos + (j * boxSize);
-					float boxTopPos = topPos + (i * boxSize);
-					collisionRect[index].Set (boxLeftPos, boxTopPos, boxSize, boxSize);
-					index++;
-				}
-			}
-			imageRect.Set (leftPos, topPos, size, size);
-		}
-
+        if (isEnabled)
+        {
+            if (lastScreenHeight != Screen.height || lastScreenWidth != Screen.width)
+            {
+                lastScreenHeight = Screen.height;
+                lastScreenWidth = Screen.width;
+                // TODO: call when size changed
+                size = Screen.height / relativeSize;
+                topPos = (Screen.height - size) - (Screen.width / relativeBottom);
+                leftPos = Screen.width / relativeLeft;
+                boxSize = size / 3f;
+                int index = 0;
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        float boxLeftPos = leftPos + (j * boxSize);
+                        float boxTopPos = topPos + (i * boxSize);
+                        collisionRect[index].Set(boxLeftPos, boxTopPos, boxSize, boxSize);
+                        index++;
+                    }
+                }
+                imageRect.Set(leftPos, topPos, size, size);
+            }
+        }
 	}
 
 	// Generate GUI On Screen
 	void OnGUI() {
-		if(!controlGraphics) {
+        if (!controlGraphics || !isEnabled)
+        {
 			return;
 		}
 		GUI.DrawTexture (imageRect, controlGraphics, ScaleMode.StretchToFill, true);

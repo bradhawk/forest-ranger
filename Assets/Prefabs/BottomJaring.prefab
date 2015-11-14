@@ -15,7 +15,7 @@ GameObject:
   - 61: {fileID: 6197162}
   m_Layer: 10
   m_Name: BottomJaring
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58,9 +58,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: -.0308962651, y: -1.18948174}
+  m_Offset: {x: -.0308960676, y: -.556121647}
   serializedVersion: 2
-  m_Size: {x: 3.72135472, y: 1.01597464}
+  m_Size: {x: 2.11478376, y: .737912655}
 --- !u!114 &11452384
 MonoBehaviour:
   m_ObjectHideFlags: 1

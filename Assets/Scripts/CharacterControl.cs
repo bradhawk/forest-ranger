@@ -14,6 +14,7 @@ public class CharacterControl : MonoBehaviour {
     public float cooldownTime = 2f;
 	public VirtualDirectionalControl dirControl;
 	public VirtualButton actionButton;
+    public WebLeft webLeft;
 
 	private float savedFreezeTime;
 	private bool isFiring;
@@ -112,8 +113,9 @@ public class CharacterControl : MonoBehaviour {
 		}
 		Move (moveDir);
 
-		if(actionButton.GetPressedDown() && canCast) {
+		if(actionButton.GetPressedDown() && canCast && !webLeft.isEmpty()) {
 			FireBullet();
+            webLeft.decreaseWeb();
 		}
 
         animator.SetInteger("Direction", direction);

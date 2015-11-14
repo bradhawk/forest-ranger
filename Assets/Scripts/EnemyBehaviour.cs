@@ -3,9 +3,11 @@ using System.Collections;
 
 public class EnemyBehaviour : MonoBehaviour {
 
+    public EnemiesLeft enemiesLeft;
+
 	// Use this for initialization
 	void Start () {
-	
+        enemiesLeft.instantiateEnemy();
 	}
 	
 	// Update is called once per frame
@@ -16,7 +18,7 @@ public class EnemyBehaviour : MonoBehaviour {
     // Called when something collides
     void OnCollisionEnter2D(Collision2D coll) {
         if (coll.gameObject.tag == "Projectile") {
-            print("aw!");
+            enemiesLeft.decreaseEnemy();
             Destroy(gameObject);
         }
     }

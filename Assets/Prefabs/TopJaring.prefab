@@ -15,7 +15,7 @@ GameObject:
   - 61: {fileID: 6160804}
   m_Layer: 10
   m_Name: TopJaring
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 112988}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -3.54099989, y: -.101999998, z: 0}
   m_LocalScale: {x: .300000012, y: .300000012, z: .300000012}
   m_Children: []
   m_Father: {fileID: 0}
@@ -58,9 +58,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: -.0308958683, y: 1.20492971}
+  m_Offset: {x: 0, y: .432538986}
   serializedVersion: 2
-  m_Size: {x: 3.53598189, y: 1.35582602}
+  m_Size: {x: 1.99120116, y: .923286259}
 --- !u!114 &11440350
 MonoBehaviour:
   m_ObjectHideFlags: 1
