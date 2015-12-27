@@ -4,6 +4,7 @@ using System.Collections;
 public class FinishDetector : MonoBehaviour {
 
     public EnemiesLeft enemiesLeft;
+    public GameSystem gameSystem;
 
 	// Use this for initialization
 	void Start () {
@@ -19,7 +20,7 @@ public class FinishDetector : MonoBehaviour {
     {
         if (coll.gameObject.tag == "Player" && enemiesLeft.isEmpty())
         {
-            // TODO: Finish! back to menu. And complete.
+            gameSystem.finishGame();
         }
     }
 }

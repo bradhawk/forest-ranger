@@ -15,6 +15,7 @@ public class CharacterControl : MonoBehaviour {
 	public VirtualDirectionalControl dirControl;
 	public VirtualButton actionButton;
     public WebLeft webLeft;
+    public AudioSource lemparJaringSound;
 
 	private float savedFreezeTime;
 	private bool isFiring;
@@ -116,6 +117,10 @@ public class CharacterControl : MonoBehaviour {
 		if(actionButton.GetPressedDown() && canCast && !webLeft.isEmpty()) {
 			FireBullet();
             webLeft.decreaseWeb();
+            if (lemparJaringSound != null)
+            {
+                lemparJaringSound.Play();
+            }
 		}
 
         animator.SetInteger("Direction", direction);

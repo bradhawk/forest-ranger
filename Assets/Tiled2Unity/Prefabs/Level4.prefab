@@ -26,7 +26,7 @@ GameObject:
   - 60: {fileID: 6092506}
   m_Layer: 0
   m_Name: Collision
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -139,7 +139,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -30000
 --- !u!33 &3380564
 MeshFilter:
   m_ObjectHideFlags: 1

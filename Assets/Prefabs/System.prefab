@@ -11,6 +11,7 @@ GameObject:
   - 114: {fileID: 11419934}
   - 114: {fileID: 11436130}
   - 114: {fileID: 11449236}
+  - 114: {fileID: 11440504}
   m_Layer: 0
   m_Name: System
   m_TagString: Untagged
@@ -41,7 +42,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38f97ce79c89d134a8e58cdb0d39d695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEnemies: 10
   textField: {fileID: 0}
 --- !u!114 &11436130
 MonoBehaviour:
@@ -56,6 +56,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxWebs: 10
   textField: {fileID: 0}
+--- !u!114 &11440504
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 138332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62b9dfa7de255764f80799c8f1952226, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseScreen: {fileID: 0}
+  gameOverScreen: {fileID: 0}
+  finishScreen: {fileID: 0}
+  virtualButton: {fileID: 0}
+  virDirButton: {fileID: 0}
+  timeLeft: {fileID: 11449236}
 --- !u!114 &11449236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -69,6 +86,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxTimeInSecs: 300
   textFeild: {fileID: 0}
+  isRunning: 0
+  isFinished: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
